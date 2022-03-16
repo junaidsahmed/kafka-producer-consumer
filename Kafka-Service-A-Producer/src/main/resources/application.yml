@@ -1,0 +1,13 @@
+server:
+  port: 9090
+  main:
+    lazy-initialization: true
+
+file:
+  path:"./employees records/employees.csv"
+
+kafka:
+  producer:
+    bootstrap-server: http://${kafka}:${port}
+    #bootstrap-server: http://localhost:9092
+  topic: employee_personal_details

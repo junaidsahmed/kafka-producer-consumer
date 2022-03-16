@@ -1,0 +1,49 @@
+plugins {
+	id 'org.springframework.boot' version '2.5.6'
+	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+	//id 'org.asciidoctor.convert' version '1.5.8'
+	id 'java'
+}
+
+group = 'com.kafka.service.consumer'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-data-rest'
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'com.opencsv:opencsv:5.3'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa:2.5.3'
+	implementation 'mysql:mysql-connector-java:8.0.27'
+	implementation 'org.springframework.kafka:spring-kafka:2.7.6'
+	implementation 'com.google.code.gson:gson:2.8.9'
+   // implementation 'org.springframework.data:spring-data-mongodb:3.2.3'
+
+	compileOnly 'org.projectlombok:lombok'
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+	annotationProcessor 'org.projectlombok:lombok'
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
+}
+
+test {
+	Map<String,String> envprop= new HashMap<>()
+	envprop.put("db_url","localhost");envprop.put("db_port","3306")
+	envprop.put("kafka","localhost");envprop.put("kafka_port","9092")
+	envprop.put("db_username","root");envprop.put("db_pwd","")
+	envprop.put("db_schema","test_db")
+	environment(envprop)
+	//useJUnitPlatform()
+}
+
+
